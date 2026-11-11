@@ -1,0 +1,17 @@
+dist/
+Resources/vendor/
+__pycache__/
+*.pyc
+docs/baseline-hashes.json
+docs/baseline-v1.1-hashes.json
+backups/
+.DS_Store
+local-notes/
+.venv/
+.build-venv/
+.env
+.env.*
+!.env.example
+*.log
+*.dSYM/
+core

@@ -1,0 +1,37 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Install development dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -r requirements-dev.txt
+      - name: Check adapter, localization, and documentation
+        run: |
+          .venv/bin/python -m unittest discover -s tests -v
+          .venv/bin/python scripts/check-localization.py
+          .venv/bin/python scripts/check-project.py
+      - name: Check native interaction
+        run: bash scripts/check-ui.sh
+      - name: Build and check packaged integration
+        run: |
+          bash scripts/build.sh
+          'dist/Hermes Model Studio.app/Contents/MacOS/HermesModelStudio' --self-test
+          codesign --verify --deep --strict 'dist/Hermes Model Studio.app'
