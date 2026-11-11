@@ -2,6 +2,16 @@
 
 [English](CHANGELOG.md) | 简体中文
 
+## 1.3.1 — 2026-11-11
+
+### macOS 发布包
+
+- 为 Apple Silicon（`arm64`）和 Intel（`x86_64`）分别提供 ZIP 下载，并附 SHA-256 校验和。
+- 内置 Python 3.12.16 和解析依赖，发布应用不再依赖开发目录或单独安装的 Python。
+- 适配程序使用隔离模式运行，增加解压换目录后的集成检查、架构检查和签名验证。
+- 增加仅面向 macOS 的打包工作流，在对应架构的 GitHub 运行器上分别构建和检查。
+- 补充中英文下载与安装说明。发布包采用临时签名（ad-hoc），尚未经过 Apple 公证。
+
 ## 1.3.0 — 2026-11-11
 
 Hermes Model Studio 首次在 `hermes-model-manager` 仓库公开源码。

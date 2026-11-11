@@ -55,7 +55,7 @@ bash scripts/build.sh
 
 安装程序检查应用包身份和签名，在 `~/Applications` 中暂存新应用，并将旧应用保留在项目中已被 Git 忽略的 `backups/` 目录。它不会结束正在运行的应用；重新打开应用后才会加载已安装的版本。
 
-可用 `STUDIO_ARCH=arm64` 或 `STUDIO_ARCH=x86_64` 覆盖编译目标。交叉编译不等于在相应架构上完成运行验收。Developer ID 签名、公证和内嵌 Python 解释器不属于本地构建流程。
+可用 `STUDIO_ARCH=arm64` 或 `STUDIO_ARCH=x86_64` 覆盖编译目标。交叉编译不等于在相应架构上完成运行验收。本地开发构建使用外部解释器；[发布流程](releasing.zh-CN.md) 会内置 Python，并在对应架构的运行器上分别检查。目前未配置 Developer ID 签名与公证。
 
 ## 公开仓库内容检查
 

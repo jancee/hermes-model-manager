@@ -55,7 +55,7 @@ bash scripts/build.sh
 
 The installer checks bundle identity and signature, stages the new app in `~/Applications`, and preserves the previous app in the project's ignored `backups/` directory. It never quits a running application. Reopen the app to load the installed version.
 
-`STUDIO_ARCH=arm64` or `STUDIO_ARCH=x86_64` overrides the compile target. Cross-compilation is not runtime acceptance on that architecture. Developer ID signing, notarization, and an embedded Python interpreter are not part of this local build workflow.
+`STUDIO_ARCH=arm64` or `STUDIO_ARCH=x86_64` overrides the compile target. Cross-compilation is not runtime acceptance on that architecture. This local build uses an external interpreter. The [release workflow](releasing.md) bundles Python and checks each architecture on its matching runner. Developer ID signing and notarization are not currently configured.
 
 ## Public repository hygiene
 

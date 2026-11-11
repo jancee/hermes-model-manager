@@ -22,4 +22,4 @@ Provide the affected version, impact, and a reproduction using synthetic data. D
 
 Revision checks and atomic replacement reduce accidental overwrites. An external editor that ignores locking can still race with a write. Avoid editing the same files simultaneously.
 
-Local builds use ad-hoc signing and are not notarized installers. The app relies on a local Python interpreter; maintain and update that interpreter separately.
+Release ZIPs and local builds use ad-hoc signing and are not Apple-notarized. Release ZIPs include Python; update the application to receive runtime updates. Source builds use a local Python interpreter, which must be maintained separately. Runtime downloads are pinned by URL and SHA-256 in `scripts/python-runtime.json`.

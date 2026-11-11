@@ -100,10 +100,13 @@ enum Bridge {
 
     static func python() throws -> String {
         let user = FileManager.default.homeDirectoryForCurrentUser.path
-        var candidates: [String] = []
+        // Release bundles carry their own relocatable interpreter.
+        var candidates: [String] = [resource("Python/bin/python3").path]
         if let data = try? Data(contentsOf: resource("runtime.json")),
            let cfg = try? JSONSerialization.jsonObject(with: data) as? [String: String],
-           let executable = cfg["python"] { candidates.append(executable) }
+           let executable = cfg["python"] {
+            candidates.append(executable.hasPrefix("/") ? executable : resource(executable).path)
+        }
         if let override = ProcessInfo.processInfo.environment["STUDIO_PYTHON"], !override.isEmpty { candidates.insert(override, at: 0) }
         candidates += [user + "/.hermes/hermes-agent/.venv/bin/python", user + "/miniforge3/bin/python3", "/opt/homebrew/bin/python3", "/usr/local/bin/python3", "/usr/bin/python3"]
         guard let path = candidates.first(where: { FileManager.default.isExecutableFile(atPath: $0) }) else {
@@ -115,12 +118,13 @@ enum Bridge {
     static func run(_ request: [String: Any]) throws -> Data {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: try python())
-        process.arguments = [resource("bridge.py").path, "--home", home]
+        process.arguments = ["-I", "-B", resource("bridge.py").path, "--home", home]
         process.currentDirectoryURL = resource("")
         var env = ProcessInfo.processInfo.environment
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         env["PYTHONNOUSERSITE"] = "1"
         env.removeValue(forKey: "PYTHONPATH")
+        env.removeValue(forKey: "PYTHONHOME")
         process.environment = env
         let input = Pipe(), output = Pipe()
         process.standardInput = input; process.standardOutput = output; process.standardError = FileHandle.nullDevice

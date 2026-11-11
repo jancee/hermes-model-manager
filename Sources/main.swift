@@ -134,6 +134,9 @@ struct StudioApplication {
     }
 
     static func selfTest() throws {
+        if CommandLine.arguments.contains("--require-bundled-runtime"), try Bridge.python() != Bridge.resource("Python/bin/python3").path {
+            throw StudioError(message: "Integration check requires the bundled Python runtime")
+        }
         let folder = FileManager.default.temporaryDirectory.appendingPathComponent("hermes-studio-test-" + UUID().uuidString)
         try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: folder) }

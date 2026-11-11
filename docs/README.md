@@ -9,6 +9,7 @@ Project documentation is maintained as Markdown alongside the source. English fi
 | [Project README](../README.md) | Features, setup, usage, and data locations |
 | [Architecture](architecture.md) | Components, storage boundaries, and write behavior |
 | [Development](development.md) | Build, tests, previews, and installation |
+| [Releasing](releasing.md) | macOS packages, checksums, and GitHub Releases |
 | [Localization](localization.md) | Interface strings and language support |
 | [Contributing](../CONTRIBUTING.md) | Changes, bug reports, and review expectations |
 | [Security](../SECURITY.md) | Credentials, backups, and vulnerability reporting |

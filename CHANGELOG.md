@@ -2,6 +2,16 @@
 
 English | [简体中文](CHANGELOG.zh-CN.md)
 
+## 1.3.1 — 2026-11-11
+
+### macOS release packages
+
+- Separate ZIP downloads for Apple Silicon (`arm64`) and Intel (`x86_64`), with SHA-256 checksums.
+- Bundled Python 3.12.16 and parsing dependencies, so release apps do not depend on a development checkout or separate Python installation.
+- Isolated adapter execution, relocated-package integration checks, architecture checks, and signature verification.
+- A macOS-only packaging workflow that builds and checks both architectures on matching GitHub runners.
+- Download and installation instructions in English and Chinese. Packages are ad-hoc signed, not Apple-notarized.
+
 ## 1.3.0 — 2026-11-11
 
 Initial source publication of Hermes Model Studio in the `hermes-model-manager` repository.

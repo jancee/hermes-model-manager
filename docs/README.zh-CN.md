@@ -9,6 +9,7 @@
 | [项目 README](../README.zh-CN.md) | 功能、安装、用法和数据位置 |
 | [架构说明](architecture.zh-CN.md) | 组件、存储边界和写入行为 |
 | [开发指南](development.zh-CN.md) | 构建、测试、预览和安装 |
+| [发布指南](releasing.zh-CN.md) | macOS 安装包、校验和与 GitHub Release |
 | [本地化指南](localization.zh-CN.md) | 界面字符串与语言支持 |
 | [贡献指南](../CONTRIBUTING.zh-CN.md) | 修改、问题报告和评审要求 |
 | [安全说明](../SECURITY.zh-CN.md) | 凭证、备份和漏洞报告 |

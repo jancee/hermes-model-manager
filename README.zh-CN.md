@@ -21,13 +21,26 @@
 ## 环境要求
 
 - macOS 13 或更高版本。
-- 构建应用需要包含 Swift 的 Xcode Command Line Tools。
-- Python 3.10 或更高版本。下方安装流程使用 Python 3.12 和 [uv](https://docs.astral.sh/uv/)。
 - 正常使用需要已有的本机 Hermes 配置。测试和演示预览使用虚构数据。
 
-构建默认使用当前 Mac 的架构。开发验证已在 Apple Silicon 上完成；分发 Intel 构建前，请在 Intel Mac 上验证。应用内附带 Python 解析依赖，但仍使用本机 Python 解释器，未内嵌解释器。
+## 下载 macOS 应用
 
-## 构建与安装
+从 [GitHub Releases](https://github.com/jancee/hermes-model-manager/releases/latest) 下载：
+
+| Mac 类型 | 安装包 |
+| --- | --- |
+| Apple Silicon（M 系列） | [macOS arm64 ZIP](https://github.com/jancee/hermes-model-manager/releases/download/v1.3.1/Hermes-Model-Studio-1.3.1-macOS-arm64.zip) |
+| Intel | [macOS x86_64 ZIP](https://github.com/jancee/hermes-model-manager/releases/download/v1.3.1/Hermes-Model-Studio-1.3.1-macOS-x86_64.zip) |
+
+解压 ZIP，将 **Hermes Model Studio.app** 移入「应用程序」。发布包内置 Python 和所需解析库，无需另装 Python 或开发工具。仅发布 macOS 二进制包，并随 Release 提供校验和。
+
+M 系列 Mac 请选择 **arm64**：主程序和内置运行环境均为 Apple Silicon 原生二进制，不使用 Rosetta。Intel 包用于 Intel Mac。
+
+应用采用临时签名（ad-hoc），尚未经过 Apple 公证。如果首次打开时 macOS 提示无法验证开发者，请先确认安装包来自本仓库，再按 [Apple 的单应用「仍要打开」说明](https://support.apple.com/en-us/102445) 操作。
+
+## 从源码构建
+
+源码构建需要 Xcode Command Line Tools 和 Python 3.10+。下方流程使用 Python 3.12 和 [uv](https://docs.astral.sh/uv/)。开发构建使用本机解释器；[发布打包流程](docs/releasing.zh-CN.md) 会内置解释器。
 
 ```bash
 git clone https://github.com/jancee/hermes-model-manager.git
@@ -41,7 +54,7 @@ open "$HOME/Applications/Hermes Model Studio.app"
 
 安装程序会将已有应用保留在项目中已被 Git 忽略的 `backups/` 目录。安装更新后，退出并重新打开应用以加载新版；安装程序不会结束正在运行的应用，也不会重启 Hermes。
 
-构建脚本默认使用 `.venv/bin/python`。需要时，可用 `STUDIO_PYTHON` 指定其他兼容解释器，或将 `STUDIO_ARCH` 设为 `arm64` 或 `x86_64`。本地构建采用临时签名（ad-hoc）；本仓库未提供经过公证的发布版安装程序。
+构建脚本默认使用 `.venv/bin/python` 和当前 Mac 的架构。需要时，可用 `STUDIO_PYTHON` 指定其他兼容解释器，或将 `STUDIO_ARCH` 设为 `arm64` 或 `x86_64`。本地构建采用临时签名（ad-hoc）。
 
 ## 日常使用
 

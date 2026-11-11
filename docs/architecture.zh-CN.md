@@ -43,4 +43,4 @@ Hermes Model Studio 是一个 SwiftUI/AppKit 桌面应用，通过小型 Python 
 
 ## 运行环境
 
-应用使用 macOS 的 SwiftUI 和 AppKit，调用本机 Python 3.10+ 解释器，并内置 PyYAML 与 python-dotenv 的纯 Python 副本。构建时会记录解释器路径；运行时查找还支持 `STUDIO_PYTHON` 和常见的本机安装位置。应用不内嵌解释器本身。
+应用使用 macOS 的 SwiftUI 和 AppKit，并内置 PyYAML 与 python-dotenv 的纯 Python 副本。发布 ZIP 在 `Contents/Resources/Python` 中包含可迁移的 Python 解释器，运行环境清单使用相对路径。开发构建使用本机 Python 3.10+。运行时依次查找显式指定的 `STUDIO_PYTHON`、内置解释器及开发或本机安装位置。适配程序以隔离导入模式运行，并禁止写入字节码（`-I -B`）。

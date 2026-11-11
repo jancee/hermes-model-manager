@@ -43,4 +43,4 @@ Compatibility depends on Hermes's configuration schema, client preference format
 
 ## Runtime
 
-The app uses macOS SwiftUI and AppKit. It runs a local Python 3.10+ interpreter and bundles pure-Python copies of PyYAML and python-dotenv. A build records its interpreter path; runtime lookup also supports `STUDIO_PYTHON` and common local installations. The interpreter itself is not bundled.
+The app uses macOS SwiftUI and AppKit and bundles pure-Python copies of PyYAML and python-dotenv. Release ZIPs include a relocatable Python interpreter under `Contents/Resources/Python`; their runtime manifest uses a relative path. Developer builds use a local Python 3.10+ interpreter. Runtime lookup supports an explicit `STUDIO_PYTHON` override, then the bundled interpreter, then development/local installations. The adapter runs with isolated imports and bytecode writes disabled (`-I -B`).

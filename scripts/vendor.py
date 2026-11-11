@@ -11,7 +11,9 @@ dest = Path(sys.argv[1])
 for module, distribution in [(yaml, "PyYAML"), (dotenv, "python-dotenv")]:
     source = Path(module.__file__).parent
     target = dest / "vendor" / source.name
-    shutil.copytree(source, target, dirs_exist_ok=True, ignore=shutil.ignore_patterns("__pycache__", "*.so", "*.pyc"))
+    if target.exists():
+        shutil.rmtree(target)
+    shutil.copytree(source, target, ignore=shutil.ignore_patterns("__pycache__", "*.so", "*.pyc"))
     dist = importlib.metadata.distribution(distribution)
     for file in dist.files or []:
         if "license" in str(file).lower() and file.name.lower().startswith("license"):

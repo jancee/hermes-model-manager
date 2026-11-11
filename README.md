@@ -21,13 +21,26 @@ A native macOS companion for managing your local [Hermes](https://github.com/Nou
 ## Requirements
 
 - macOS 13 or later.
-- Xcode Command Line Tools, including Swift, to build the app.
-- Python 3.10 or later. The setup below uses Python 3.12 and [uv](https://docs.astral.sh/uv/).
 - An existing local Hermes configuration for normal use. Tests and demo previews use synthetic data.
 
-The build targets the current Mac's architecture. Development has been verified on Apple Silicon; check Intel builds on an Intel Mac before distributing them. The app bundles its Python parsing dependencies, but uses a local Python interpreter rather than embedding one.
+## Download the macOS app
 
-## Build and install
+Download from [GitHub Releases](https://github.com/jancee/hermes-model-manager/releases/latest):
+
+| Mac | Package |
+| --- | --- |
+| Apple Silicon (M-series) | [macOS arm64 ZIP](https://github.com/jancee/hermes-model-manager/releases/download/v1.3.1/Hermes-Model-Studio-1.3.1-macOS-arm64.zip) |
+| Intel | [macOS x86_64 ZIP](https://github.com/jancee/hermes-model-manager/releases/download/v1.3.1/Hermes-Model-Studio-1.3.1-macOS-x86_64.zip) |
+
+Extract the ZIP and move **Hermes Model Studio.app** to Applications. Release packages include Python and the required parsers; no separate Python installation or developer tools are needed. Only macOS binaries are published. Checksums are provided with each release.
+
+Choose **arm64** on an M-series Mac. Its application and bundled runtime are native Apple Silicon binaries and do not use Rosetta. The Intel package is intended for Intel Macs.
+
+The app is ad-hoc signed and is not Apple-notarized. If macOS blocks the first launch because the developer cannot be verified, follow [Apple's per-app Open Anyway instructions](https://support.apple.com/en-us/102445) after confirming the download came from this repository.
+
+## Build from source
+
+Source builds require Xcode Command Line Tools and Python 3.10+. The following setup uses Python 3.12 and [uv](https://docs.astral.sh/uv/). Developer builds use a local interpreter; the [release packaging workflow](docs/releasing.md) embeds one.
 
 ```bash
 git clone https://github.com/jancee/hermes-model-manager.git
@@ -41,7 +54,7 @@ open "$HOME/Applications/Hermes Model Studio.app"
 
 The installer preserves an existing application in the project's ignored `backups/` directory. Quit and reopen the application to load an update; the installer does not quit running applications or restart Hermes.
 
-Build scripts use `.venv/bin/python` by default. Set `STUDIO_PYTHON` to another compatible interpreter or `STUDIO_ARCH` to `arm64` or `x86_64` when needed. Local builds are ad-hoc signed; this repository does not provide a notarized release installer.
+Build scripts use `.venv/bin/python` by default and target the current Mac's architecture. Set `STUDIO_PYTHON` to another compatible interpreter or `STUDIO_ARCH` to `arm64` or `x86_64` when needed. Local builds are ad-hoc signed.
 
 ## Everyday use
 
